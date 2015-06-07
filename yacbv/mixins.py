@@ -11,7 +11,7 @@ class HttpMethodRestrictMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
         if self.method_name not in self.allowed_methods:
-            return HttpResponseNotAllowed()
+            return HttpResponseNotAllowed(self.allowed_methods)
 
         super(HttpMethodRestrictMixin, self).dispatch(request, *args, **kwargs)
 

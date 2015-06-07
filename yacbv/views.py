@@ -10,7 +10,7 @@ class View(object):
         self.method_name = self.request.method.lower()
         method = getattr(self, self.method_name, self._not_implemented)
 
-        return method(*args, **kwargs)
+        return method(request, *args, **kwargs)
 
     def _not_implemented(self):
         raise NotImplementedError(
