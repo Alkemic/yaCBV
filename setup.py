@@ -8,7 +8,7 @@ f.close()
 
 setup(
     name='yacbv',
-    version='0.1.1',
+    version='0.2.0',
     description='Yet another class based views for Django',
     long_description=readme,
     author="Daniel Czuba",

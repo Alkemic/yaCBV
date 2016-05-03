@@ -6,17 +6,17 @@ class View(object):
         return self.dispatch(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-        self.request = request
-        self.method_name = self.request.method.lower()
-        method = getattr(self, self.method_name, self._not_implemented)
+        method_name = request.method.lower()
+        method = getattr(self, method_name, self._not_implemented)
 
         return method(request, *args, **kwargs)
 
-    def _not_implemented(self):
+    def _not_implemented(self, request):
+        method_name = request.method.lower()
         raise NotImplementedError(
             '\'%s.%s\' method is not implemented.' % (
                 self.__class__.__name__,
-                self.method_name,
+                method_name,
             ),
         )
 

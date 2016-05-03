@@ -10,7 +10,8 @@ class HttpMethodRestrictMixin(object):
     ]
 
     def dispatch(self, request, *args, **kwargs):
-        if self.method_name not in self.allowed_methods:
+        method_name = request.method.lower()
+        if method_name not in self.allowed_methods:
             return HttpResponseNotAllowed(self.allowed_methods)
 
         super(HttpMethodRestrictMixin, self).dispatch(request, *args, **kwargs)
@@ -27,5 +28,5 @@ class TemplateMixin(object):
         return render_to_response(
             self.template_name,
             context,
-            context_instance=RequestContext(self.request),
+            context_instance=RequestContext(request),
         )
